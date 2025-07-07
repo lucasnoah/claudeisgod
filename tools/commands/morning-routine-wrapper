@@ -1,0 +1,8 @@
+#!/bin/bash
+# Wrapper for morning-routine slash command
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Execute the morning-routine script
+exec "$SCRIPT_DIR/morning-routine"

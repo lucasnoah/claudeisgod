@@ -1,0 +1,1 @@
+List all morning routine logs in chronological order from the logs directory.

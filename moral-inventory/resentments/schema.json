@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Step 4 Resentment Inventory",
+  "description": "Schema for tracking resentments according to the Big Book Step 4 process",
+  "type": "object",
+  "properties": {
+    "resentments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resentment"
+      }
+    }
+  },
+  "definitions": {
+    "resentment": {
+      "type": "object",
+      "required": ["id", "person_institution_principle", "the_cause", "affects_my", "date_added"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resentment"
+        },
+        "person_institution_principle": {
+          "type": "string",
+          "description": "Who or what I'm resentful at (Column 1)"
+        },
+        "the_cause": {
+          "type": "string",
+          "description": "What they did to cause the resentment (Column 2)"
+        },
+        "affects_my": {
+          "type": "object",
+          "description": "How this affects me (Column 3)",
+          "properties": {
+            "self_esteem": {
+              "type": "boolean",
+              "description": "Affects my self-esteem"
+            },
+            "security": {
+              "type": "boolean",
+              "description": "Affects my security (emotional/financial)"
+            },
+            "ambitions": {
+              "type": "boolean",
+              "description": "Affects my ambitions"
+            },
+            "personal_relations": {
+              "type": "boolean",
+              "description": "Affects my personal relations"
+            },
+            "sex_relations": {
+              "type": "boolean",
+              "description": "Affects my sex relations"
+            },
+            "pride": {
+              "type": "boolean",
+              "description": "Affects my pride"
+            },
+            "pocketbook": {
+              "type": "boolean",
+              "description": "Affects my pocketbook (finances)"
+            }
+          }
+        },
+        "my_part": {
+          "type": "object",
+          "description": "Where was I at fault? (Column 4)",
+          "properties": {
+            "selfish": {
+              "type": "boolean",
+              "description": "Was I selfish?"
+            },
+            "self_seeking": {
+              "type": "boolean",
+              "description": "Was I self-seeking?"
+            },
+            "dishonest": {
+              "type": "boolean",
+              "description": "Was I dishonest?"
+            },
+            "frightened": {
+              "type": "boolean",
+              "description": "Was I frightened?"
+            },
+            "inconsiderate": {
+              "type": "boolean",
+              "description": "Was I inconsiderate?"
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed description of my part"
+            }
+          }
+        },
+        "realizations": {
+          "type": "array",
+          "description": "What I've realized about this resentment",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of realization"
+              },
+              "insight": {
+                "type": "string",
+                "description": "The realization or insight"
+              }
+            }
+          }
+        },
+        "actions_taken": {
+          "type": "array",
+          "description": "Actions taken to address this resentment",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Date action was taken"
+              },
+              "action": {
+                "type": "string",
+                "description": "Description of the action taken"
+              },
+              "outcome": {
+                "type": "string",
+                "description": "Result or outcome of the action"
+              }
+            }
+          }
+        },
+        "prayer_status": {
+          "type": "object",
+          "description": "Prayer work for this person",
+          "properties": {
+            "prayed_for": {
+              "type": "boolean",
+              "description": "Have I prayed for this person?"
+            },
+            "last_prayer_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Last date I prayed for them"
+            },
+            "prayer_notes": {
+              "type": "string",
+              "description": "Notes about prayer work"
+            }
+          }
+        },
+        "amends_status": {
+          "type": "string",
+          "enum": ["not_needed", "to_be_made", "in_progress", "completed", "living_amends"],
+          "description": "Status of amends for this resentment"
+        },
+        "date_added": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this resentment was added to inventory"
+        },
+        "date_resolved": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this resentment was resolved (if applicable)"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes or reflections"
+        }
+      }
+    }
+  }
+}

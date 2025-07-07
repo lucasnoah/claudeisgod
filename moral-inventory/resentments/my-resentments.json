@@ -1,0 +1,50 @@
+{
+  "resentments": [
+    {
+      "id": 1,
+      "date_added": "2025-01-07",
+      "who_what": "Myself",
+      "the_cause": "I try and keep habits but fail. I start things and don't finish.",
+      "affects_my": {
+        "self_esteem": true,
+        "security": true,
+        "ambitions": true,
+        "personal_relations": true,
+        "sex_relations": false,
+        "pride": true,
+        "pocketbook": true
+      },
+      "my_part": {
+        "selfish": true,
+        "self_seeking": false,
+        "dishonest": false,
+        "frightened": false,
+        "inconsiderate": false,
+        "description": "I am selfish and just want to be obsessed with something, to lose my sense of self"
+      }
+    },
+    {
+      "id": 2,
+      "date_added": "2025-01-07",
+      "who_what": "Myself",
+      "the_cause": "I hide my mistakes. I distract people with sparkling new narratives. I lie and gloss over details.",
+      "affects_my": {
+        "self_esteem": true,
+        "security": true,
+        "ambitions": true,
+        "personal_relations": true,
+        "sex_relations": true,
+        "pride": true,
+        "pocketbook": true
+      },
+      "my_part": {
+        "selfish": true,
+        "self_seeking": true,
+        "dishonest": true,
+        "frightened": true,
+        "inconsiderate": true,
+        "description": "I think maybe my eyes being too big for my stomach / my ADHD deficit in effective executive planning and function. I get in over my head, fail to execute and then twist my way out."
+      }
+    }
+  ]
+}

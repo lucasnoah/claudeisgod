@@ -1,0 +1,466 @@
+#!/bin/bash
+
+# Morning Save - Interactive guided morning routine with automatic saving
+# This command guides through morning routine questions and saves responses
+
+# Get current date and time
+CURRENT_DATE=$(date '+%Y-%m-%d')
+CURRENT_TIME=$(date '+%H:%M')
+CURRENT_DATETIME=$(date '+%Y-%m-%d %H:%M:%S')
+
+# Create logs directory if it doesn't exist
+LOG_DIR="/home/lucas/projects/my-addiction/logs"
+mkdir -p "$LOG_DIR"
+
+# Log file path
+LOG_FILE="$LOG_DIR/morning-routine-$CURRENT_DATE.txt"
+
+# Color codes
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m' # No Color
+
+# Function to prompt and read response
+prompt_user() {
+    local prompt="$1"
+    echo -e "${BLUE}$prompt${NC}"
+    read -r response
+    echo "$response"
+}
+
+# Function to display supportive messages
+encourage() {
+    local message="$1"
+    echo -e "${GREEN}$message${NC}"
+    echo ""
+}
+
+# Function to display section headers
+section_header() {
+    local header="$1"
+    echo ""
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════${NC}"
+    echo -e "${YELLOW}$header${NC}"
+    echo -e "${YELLOW}═══════════════════════════════════════════════════════${NC}"
+    echo ""
+}
+
+# Start the routine
+clear
+echo -e "${CYAN}╔═══════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║          🌅 AA MORNING ROUTINE - GUIDED SESSION       ║${NC}"
+echo -e "${CYAN}╚═══════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "${GREEN}Good morning, my friend. Let's go through your morning routine together.${NC}"
+echo -e "${GREEN}Remember: progress, not perfection. Even showing up is a victory.${NC}"
+echo ""
+echo -e "${MAGENTA}Date: $CURRENT_DATE${NC}"
+echo -e "${MAGENTA}Time: $CURRENT_TIME${NC}"
+echo ""
+
+# Initial Setup
+section_header "INITIAL CHECK-IN"
+echo -e "${CYAN}First, let's establish some basics:${NC}"
+echo ""
+
+LOCATION=$(prompt_user "Where are you right now? (home, work, etc.)")
+
+echo ""
+echo -e "${CYAN}Which tier routine would you like to do?${NC}"
+echo "  Tier 1 - Essential minimum (perfect for difficult mornings)"
+echo "  Tier 2 - Standard routine"
+echo "  Tier 3 - Full comprehensive routine"
+echo ""
+TIER=$(prompt_user "Enter 1, 2, or 3:")
+
+if [[ "$TIER" == "1" ]]; then
+    encourage "Excellent choice. Tier 1 - keeping it simple and achievable. There's wisdom in knowing what you need today."
+elif [[ "$TIER" == "2" ]]; then
+    encourage "Tier 2 - a solid, balanced choice. Let's build a strong foundation for your day."
+else
+    encourage "Tier 3 - going for the full routine. Your commitment to recovery is inspiring."
+fi
+
+# Gratitude Section
+section_header "STEP 1: GRATITUDE (The Foundation)"
+
+echo -e "${CYAN}Let's begin with gratitude - the foundation of our spiritual condition.${NC}"
+echo -e "${CYAN}Think carefully about what you're genuinely grateful for.${NC}"
+echo ""
+
+MAIN_GRATITUDE=$(prompt_user "What are you MOST grateful for this morning? (This is your primary gratitude)")
+
+encourage "Thank you for sharing that. Recognizing our blessings is the first step."
+
+echo -e "${CYAN}Now, let's look at yesterday. Think of three specific things - they don't need to be profound.${NC}"
+echo -e "${CYAN}Maybe a meal, a conversation, a moment of peace, or a task completed.${NC}"
+echo ""
+
+echo -e "${BLUE}Three things from yesterday you're grateful for:${NC}"
+YESTERDAY_1=$(prompt_user "1) What's the first thing?")
+YESTERDAY_2=$(prompt_user "2) What's the second?")
+YESTERDAY_3=$(prompt_user "3) And the third?")
+
+echo ""
+echo -e "${CYAN}Finally, let's acknowledge your recovery journey:${NC}"
+RECOVERY_GRATITUDE=$(prompt_user "What about your recovery are you grateful for today?")
+
+encourage "Beautiful. You've acknowledged your blessings in life, yesterday's gifts, and your recovery progress."
+
+# Check-in Section
+section_header "STEP 2: CHECK-IN (How Are You?)"
+
+echo -e "${CYAN}Let's pause and honestly assess where you are right now.${NC}"
+echo -e "${CYAN}There's no wrong answer here - just be truthful with yourself.${NC}"
+echo ""
+
+FEELING=$(prompt_user "How are you feeling? (Consider physical, emotional, and spiritual aspects)")
+
+encourage "Thank you for that honest check-in. Awareness is the first step to change."
+
+# Spiritual Reading Section
+section_header "STEP 3: SPIRITUAL READING (Nourishment for the Day)"
+
+if [[ "$TIER" == "1" ]]; then
+    echo -e "${CYAN}For Tier 1, we just need a brief spiritual input. Even a paragraph or a single concept counts.${NC}"
+else
+    echo -e "${CYAN}Time for spiritual nourishment. This feeds our recovery for the day ahead.${NC}"
+fi
+echo ""
+
+echo -e "${BLUE}Have you done any spiritual reading this morning?${NC}"
+echo "1) Yes, I've read something"
+echo "2) No, I haven't read anything yet"
+echo ""
+read -r reading_choice
+
+if [[ "$reading_choice" == "2" ]]; then
+    echo ""
+    echo -e "${CYAN}Would you like me to suggest what to read?${NC}"
+    echo "1) Suggest a Big Book passage"
+    echo "2) Suggest a daily reading"
+    echo "3) I'll find something myself"
+    echo ""
+    read -r suggest_choice
+    
+    if [[ "$suggest_choice" == "1" ]]; then
+        echo ""
+        echo -e "${GREEN}Consider reading one of these Big Book passages:${NC}"
+        echo "- Pages 58-60: The nature of spiritual experience"
+        echo "- Pages 83-84: The promises of recovery"  
+        echo "- Pages 86-88: Daily practice principles"
+        echo "- Chapter 6: Into Action (working steps 6-7)"
+        echo ""
+        echo -e "${CYAN}Take a moment to read your chosen passage, then press Enter when ready.${NC}"
+        read -r
+    elif [[ "$suggest_choice" == "2" ]]; then
+        echo ""
+        echo -e "${CYAN}Consider:${NC}"
+        echo "- Daily Reflections for today's date"
+        echo "- Just for Today reading"
+        echo "- Twenty-Four Hours a Day"
+        echo ""
+        echo -e "${CYAN}Take a moment to read, then press Enter when ready.${NC}"
+        read -r
+    else
+        echo ""
+        echo -e "${CYAN}Take a moment for your reading, then press Enter when ready.${NC}"
+        read -r
+    fi
+fi
+
+echo ""
+READ_WHAT=$(prompt_user "What did you read? (Book/passage name)")
+INSIGHT=$(prompt_user "What key message or insight struck you?")
+APPLICATION=$(prompt_user "How might you apply this to your day? (Be specific - one practical way)")
+
+# Prayer/Meditation Section
+section_header "STEP 4: PRAYER & MEDITATION (Spiritual Connection)"
+
+if [[ "$TIER" == "1" ]]; then
+    echo -e "${CYAN}For Tier 1, even a brief prayer or moment of quiet counts.${NC}"
+    echo -e "${CYAN}Let's keep this simple but meaningful.${NC}"
+else
+    echo -e "${CYAN}Time to connect with your Higher Power and center yourself for the day.${NC}"
+fi
+echo ""
+
+# Third Step Prayer
+echo -e "${BLUE}Have you said the Third Step Prayer today?${NC}"
+echo "(\"God, I offer myself to Thee...\")"
+echo ""
+read -r third_response
+
+if [[ "$third_response" =~ ^[Nn] ]]; then
+    echo ""
+    echo -e "${CYAN}Would you like to say it now? (y/n)${NC}"
+    read -r say_third_now
+    if [[ "$say_third_now" =~ ^[Yy] ]]; then
+        echo ""
+        echo -e "${GREEN}Let's say it together:${NC}"
+        echo ""
+        echo "God, I offer myself to Thee—"
+        echo "to build with me and to do with me as Thou wilt."
+        echo "Relieve me of the bondage of self,"
+        echo "that I may better do Thy will."
+        echo "Take away my difficulties,"
+        echo "that victory over them may bear witness"
+        echo "to those I would help of Thy Power,"
+        echo "Thy Love, and Thy Way of life."
+        echo "May I do Thy will always!"
+        echo ""
+        echo -e "${CYAN}Take a moment to sit with this prayer. Press Enter when ready.${NC}"
+        read -r
+        THIRD_STEP="y"
+    else
+        THIRD_STEP="n"
+    fi
+else
+    THIRD_STEP="y"
+fi
+
+# Serenity Prayer
+echo ""
+echo -e "${BLUE}Have you said the Serenity Prayer?${NC}"
+read -r serenity_response
+
+if [[ "$serenity_response" =~ ^[Nn] ]]; then
+    echo ""
+    echo -e "${CYAN}Would you like to say it now? I can guide you through it. (y/n)${NC}"
+    read -r say_serenity_now
+    if [[ "$say_serenity_now" =~ ^[Yy] ]]; then
+        echo ""
+        echo -e "${GREEN}Let's approach this prayer with intention:${NC}"
+        echo ""
+        echo -e "${CYAN}Take a deep breath first...${NC}"
+        sleep 2
+        echo ""
+        echo "God, grant me the serenity"
+        echo "to accept the things I cannot change,"
+        echo -e "${CYAN}(Think: What must I accept today?)${NC}"
+        sleep 2
+        echo ""
+        echo "courage to change the things I can,"
+        echo -e "${CYAN}(Think: What is within my power to change?)${NC}"
+        sleep 2
+        echo ""
+        echo "and wisdom to know the difference."
+        echo ""
+        echo -e "${CYAN}Take another breath. Press Enter when ready.${NC}"
+        read -r
+        SERENITY="y"
+    else
+        SERENITY="n"
+    fi
+else
+    SERENITY="y"
+fi
+
+# Meditation
+echo ""
+echo -e "${BLUE}Did you spend any time in quiet meditation or reflection?${NC}"
+if [[ "$TIER" == "1" ]]; then
+    echo "(Even 30 seconds counts for Tier 1)"
+fi
+echo ""
+echo "1) No meditation yet"
+echo "2) Brief (under 5 minutes)"
+echo "3) 5-10 minutes"
+echo "4) 10+ minutes"
+echo ""
+read -r med_choice
+
+case $med_choice in
+    1) 
+        if [[ "$TIER" == "1" ]]; then
+            echo ""
+            echo -e "${CYAN}Would you like to take just 30 seconds of quiet reflection now? (y/n)${NC}"
+            read -r med_now
+            if [[ "$med_now" =~ ^[Yy] ]]; then
+                echo ""
+                echo -e "${GREEN}Close your eyes. Focus on your breathing for 30 seconds...${NC}"
+                echo -e "${GREEN}Starting now.${NC}"
+                sleep 30
+                echo -e "${GREEN}Well done. Every moment of mindfulness counts.${NC}"
+                MEDITATION="brief"
+            else
+                MEDITATION="none"
+            fi
+        else
+            MEDITATION="none"
+        fi
+        ;;
+    2) MEDITATION="brief";;
+    3) MEDITATION="5-10min";;
+    4) MEDITATION="10+min";;
+    *) MEDITATION="not specified";;
+esac
+
+encourage "Excellent. You've connected spiritually, which grounds your recovery for the day."
+
+# Commitments Section
+section_header "STEP 5: COMMITMENTS (Your Recovery Actions)"
+
+echo -e "${CYAN}Now let's set a concrete action for your recovery today.${NC}"
+echo -e "${CYAN}Be specific - vague intentions rarely succeed.${NC}"
+echo ""
+
+echo -e "${BLUE}What is ONE specific recovery action you commit to today?${NC}"
+echo -e "${CYAN}Examples:${NC}"
+echo "- \"Call my sponsor at 6 PM\""
+echo "- \"Write one page in my Step 4 inventory\""
+echo "- \"Attend the 7 PM meeting at [location]\""
+echo "- \"Read pages 60-63 of the Big Book\""
+echo ""
+
+MAIN_COMMITMENT=$(prompt_user "Your commitment:")
+
+encourage "That's a clear, actionable commitment. Well done."
+
+echo -e "${CYAN}Now, let's plan for difficult moments. Recovery requires backup plans.${NC}"
+echo ""
+echo -e "${BLUE}If you struggle today (with cravings, emotions, or situations), what will you do?${NC}"
+echo -e "${CYAN}Your failsafe should be simple and immediately doable.${NC}"
+echo ""
+
+FAILSAFE=$(prompt_user "If I struggle today, I will:")
+
+encourage "Excellent. You have both a plan and a safety net. This is recovery in action."
+
+# Meeting Section
+section_header "STEP 6: FELLOWSHIP (Connection & Support)"
+
+echo -e "${BLUE}Do you have a meeting planned for today? (yes/no)${NC}"
+read -r meeting_response
+
+if [[ "$meeting_response" =~ ^[Yy] ]]; then
+    MEETING_DETAILS=$(prompt_user "Which meeting and what time?")
+    MEETING_PLANNED="yes - $MEETING_DETAILS"
+    encourage "Great! Meetings are where recovery happens."
+else
+    MEETING_PLANNED="no"
+    echo ""
+    echo -e "${CYAN}Consider finding a meeting today if possible.${NC}"
+    echo -e "${CYAN}Remember: we can't do this alone.${NC}"
+fi
+
+echo ""
+CURRENT_STEP=$(prompt_user "What step are you currently working? (enter number 1-12, or 0 if not on a specific step)")
+
+# Additional info for Tier 2 and 3
+if [[ "$TIER" != "1" ]]; then
+    echo ""
+    SPONSOR_CONTACT=$(prompt_user "Have you contacted your sponsor recently? (y/n)")
+    
+    if [[ "$TIER" == "3" ]]; then
+        echo ""
+        SERVICE_WORK=$(prompt_user "Any service work planned for today?")
+        HELPING_OTHERS=$(prompt_user "Anyone you plan to reach out to help today?")
+    fi
+fi
+
+# Save to log file
+section_header "SAVING YOUR MORNING ROUTINE"
+
+echo -e "${GREEN}Compiling your morning routine record...${NC}"
+
+# Build the save content
+SAVE_CONTENT="
+================================================================================
+AA MORNING ROUTINE - $CURRENT_DATETIME
+================================================================================
+
+Date: $CURRENT_DATE
+Time: $CURRENT_TIME
+Location: $LOCATION
+Tier Completed: $TIER
+
+GRATITUDE:
+Main: $MAIN_GRATITUDE
+Yesterday's Blessings: 
+  1) $YESTERDAY_1
+  2) $YESTERDAY_2
+  3) $YESTERDAY_3
+Recovery: $RECOVERY_GRATITUDE
+
+CHECK-IN:
+Current State: $FEELING
+
+SPIRITUAL READING:
+What I Read: $READ_WHAT
+Key Insight: $INSIGHT
+Today's Application: $APPLICATION
+
+PRAYER/MEDITATION:
+Third Step Prayer: $THIRD_STEP
+Serenity Prayer: $SERENITY
+Meditation: $MEDITATION
+
+DAILY COMMITMENTS:
+Recovery Action: $MAIN_COMMITMENT
+Failsafe Plan: $FAILSAFE
+
+FELLOWSHIP:
+Meeting: $MEETING_PLANNED
+Current Step Work: Step $CURRENT_STEP"
+
+# Add tier-specific content
+if [[ "$TIER" != "1" ]]; then
+    SAVE_CONTENT="$SAVE_CONTENT
+Sponsor Contact: $SPONSOR_CONTACT"
+fi
+
+if [[ "$TIER" == "3" ]]; then
+    SAVE_CONTENT="$SAVE_CONTENT
+Service Work: $SERVICE_WORK
+Helping Others: $HELPING_OTHERS"
+fi
+
+SAVE_CONTENT="$SAVE_CONTENT
+
+================================================================================
+"
+
+# Save to file
+echo "$SAVE_CONTENT" >> "$LOG_FILE"
+
+# Success message
+echo -e "${GREEN}✅ Morning routine successfully saved!${NC}"
+echo -e "${GREEN}📄 Location: $LOG_FILE${NC}"
+echo ""
+
+# Closing encouragement
+echo -e "${CYAN}╔═══════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                  🌟 ROUTINE COMPLETE 🌟                ║${NC}"
+echo -e "${CYAN}╚═══════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+if [[ "$TIER" == "1" ]]; then
+    echo -e "${GREEN}You completed Tier 1 - that's what matters!${NC}"
+    echo -e "${GREEN}You showed up for your recovery today.${NC}"
+elif [[ "$TIER" == "2" ]]; then
+    echo -e "${GREEN}Great job completing Tier 2!${NC}"
+    echo -e "${GREEN}You've built a solid foundation for your day.${NC}"
+else
+    echo -e "${GREEN}Wonderful! You completed the full Tier 3 routine!${NC}"
+    echo -e "${GREEN}Your dedication to recovery is inspiring.${NC}"
+fi
+
+echo ""
+echo -e "${MAGENTA}Remember your commitment: $MAIN_COMMITMENT${NC}"
+echo -e "${MAGENTA}And your failsafe: $FAILSAFE${NC}"
+echo ""
+echo -e "${GREEN}Go forth and live your recovery. One day at a time. 💪${NC}"
+echo ""
+
+# Offer to display the saved content
+echo -e "${CYAN}Would you like to see your saved routine? (y/n)${NC}"
+read -r show_saved
+
+if [[ "$show_saved" =~ ^[Yy] ]]; then
+    echo ""
+    echo "$SAVE_CONTENT"
+fi

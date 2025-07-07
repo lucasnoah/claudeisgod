@@ -1,0 +1,1 @@
+View today's morning routine log. Look for the log file with today's date and display its contents.

@@ -1,0 +1,52 @@
+{
+  "resentments": [
+    {
+      "id": "example-001",
+      "person_institution_principle": "Example Person",
+      "the_cause": "They criticized my work in front of others and made me look incompetent",
+      "affects_my": {
+        "self_esteem": true,
+        "security": true,
+        "ambitions": true,
+        "personal_relations": false,
+        "sex_relations": false,
+        "pride": true,
+        "pocketbook": false
+      },
+      "my_part": {
+        "selfish": true,
+        "self_seeking": true,
+        "dishonest": false,
+        "frightened": true,
+        "inconsiderate": false,
+        "description": "I was selfish because I only cared about how I looked. I was self-seeking because I wanted recognition and praise. I was frightened of being seen as incompetent or losing my position."
+      },
+      "realizations": [
+        {
+          "date": "2025-01-06",
+          "insight": "My ego and pride were hurt more than any actual damage to my career. The criticism may have been valid and intended to help me improve."
+        },
+        {
+          "date": "2025-01-07",
+          "insight": "I often seek external validation for my self-worth, which makes me vulnerable to others' opinions."
+        }
+      ],
+      "actions_taken": [
+        {
+          "date": "2025-01-07",
+          "action": "Prayed for this person to have everything I want for myself",
+          "outcome": "Felt some relief and shift in perspective"
+        }
+      ],
+      "prayer_status": {
+        "prayed_for": true,
+        "last_prayer_date": "2025-01-07",
+        "prayer_notes": "Using the resentment prayer from page 552 of the Big Book"
+      },
+      "amends_status": "to_be_made",
+      "date_added": "2025-01-06",
+      "date_resolved": null,
+      "notes": "This resentment shows my pattern of ego-driven reactions and fear of judgment. Need to work on finding self-worth from within and my Higher Power, not from others' opinions."
+    }
+  ]
+}

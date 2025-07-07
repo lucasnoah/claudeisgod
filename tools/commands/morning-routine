@@ -1,0 +1,325 @@
+#!/bin/bash
+
+# AA Morning Routine - Interactive Sponsor-Guided Version
+# A compassionate, step-by-step morning routine for recovery
+
+clear
+echo "🌅 Good Morning! Welcome to your AA Morning Routine"
+echo "=================================================="
+echo ""
+echo "I'll guide you through your morning routine step by step,"
+echo "just like a caring sponsor would. Remember: progress, not perfection!"
+echo ""
+
+# Initial Setup
+echo "📅 Let's start with the basics:"
+read -p "What's today's date? " today_date
+read -p "What time is it? " current_time
+echo ""
+
+echo "This routine has three tiers:"
+echo "  Tier 1 (Essential) - Quick but meaningful (5-10 min)"
+echo "  Tier 2 (Standard) - Balanced practice (15-20 min)"
+echo "  Tier 3 (Full) - Comprehensive routine (20-30 min)"
+echo ""
+echo "Which tier would you like to complete today? (1/2/3)"
+echo "(If you're struggling today, I recommend Tier 1 - something is better than nothing!)"
+read -p "Tier: " tier_choice
+echo ""
+
+read -p "Where are you right now? (home, work, etc.): " location
+echo ""
+
+# Validate tier choice
+if [[ ! "$tier_choice" =~ ^[1-3]$ ]]; then
+    tier_choice="1"
+    echo "I'll guide you through Tier 1 to keep it simple today."
+    echo ""
+fi
+
+# Step 1: Gratitude (All Tiers)
+echo "📝 GRATITUDE - The Foundation of Recovery"
+echo "========================================="
+echo ""
+echo "Starting with gratitude helps shift our perspective."
+echo "What are you MOST grateful for this morning?"
+read -p "> " main_gratitude
+echo ""
+echo "Beautiful! Now let's think about yesterday..."
+echo ""
+
+if [[ "$tier_choice" == "1" ]]; then
+    echo "List 3 things from yesterday you're grateful for (anything counts!):"
+else
+    echo "List 3 things from yesterday (try to include at least one recovery-related item):"
+fi
+
+gratitude_list=""
+for i in 1 2 3; do
+    read -p "$i. " gratitude_item
+    gratitude_list="${gratitude_list}${i}. ${gratitude_item}\n"
+done
+echo ""
+
+echo "Excellent! Finally, what about your recovery are you grateful for today?"
+read -p "> " recovery_gratitude
+echo ""
+echo "Thank you for sharing. Gratitude is the foundation of spiritual growth."
+echo ""
+
+# Step 2: Check-in
+echo "🤔 DAILY CHECK-IN"
+echo "================="
+echo "How are you feeling this morning? (Be honest - this is just between us)"
+read -p "> " feeling
+echo ""
+echo "Thank you for being honest about where you are today."
+echo ""
+
+# Step 3: Spiritual Reading
+echo "📚 SPIRITUAL READING"
+echo "==================="
+if [[ "$tier_choice" == "1" ]]; then
+    echo "Have you done any spiritual reading this morning? (Big Book, daily reader, etc.)"
+    read -p "(y/n): " has_read
+    
+    if [[ "$has_read" != "y" && "$has_read" != "Y" ]]; then
+        echo ""
+        echo "Would you like to:"
+        echo "1. Open Chapter 5: How It Works (the steps)"
+        echo "2. Open Chapter 1: Bill's Story"
+        echo "3. Read a different chapter"
+        echo "4. Skip reading for now"
+        read -p "Choice (1-4): " reading_choice
+        
+        case $reading_choice in
+            1) chapter_file="chapter_05_how_it_works.pdf" ;;
+            2) chapter_file="chapter_01_bills_story.pdf" ;;
+            3) 
+                echo "Which chapter number? (1-11)"
+                read -p "> " chapter_num
+                chapter_file=$(ls /home/lucas/projects/my-addiction/bigbook/chapter_*${chapter_num}*.pdf 2>/dev/null | head -1 | basename)
+                ;;
+            *) chapter_file="" ;;
+        esac
+        
+        if [[ -n "$chapter_file" ]]; then
+            echo "Opening $chapter_file..."
+            if command -v xdg-open &> /dev/null; then
+                xdg-open "/home/lucas/projects/my-addiction/bigbook/$chapter_file" 2>/dev/null &
+            elif command -v open &> /dev/null; then
+                open "/home/lucas/projects/my-addiction/bigbook/$chapter_file"
+            else
+                echo "Please manually open: /home/lucas/projects/my-addiction/bigbook/$chapter_file"
+            fi
+            echo ""
+            echo "Take a few minutes to read. Press Enter when ready to continue..."
+            read -p ""
+        fi
+    fi
+    
+    echo ""
+    echo "What's ONE insight from your reading (or from past readings) that speaks to you today?"
+    read -p "> " reading_insight
+    echo ""
+    echo "How can you apply this insight practically today?"
+    read -p "> " reading_application
+else
+    # Tier 2 & 3 - More comprehensive reading
+    echo "What spiritual reading have you done or will you do this morning?"
+    echo "(Big Book chapters, daily readers, etc.)"
+    read -p "> " reading_done
+    echo ""
+    echo "What key insights did you gain?"
+    read -p "> " reading_insight
+    echo ""
+    echo "List 2-3 ways you can apply these insights today:"
+    for i in 1 2 3; do
+        read -p "$i. " application
+        if [[ -z "$application" ]]; then break; fi
+    done
+fi
+echo ""
+
+# Step 4: Prayer & Meditation
+echo "🙏 PRAYER & MEDITATION"
+echo "====================="
+if [[ "$tier_choice" == "1" ]]; then
+    echo "Have you said the Third Step Prayer today? (y/n)"
+    read -p "> " third_step
+    echo ""
+    
+    echo "Would you like to say the Serenity Prayer now? (y/n)"
+    read -p "> " serenity
+    if [[ "$serenity" == "y" || "$serenity" == "Y" ]]; then
+        echo ""
+        echo "Let's say it together:"
+        echo ""
+        echo "God, grant me the serenity"
+        echo "To accept the things I cannot change,"
+        echo "Courage to change the things I can,"
+        echo "And wisdom to know the difference."
+        echo ""
+        echo "Press Enter when ready to continue..."
+        read -p ""
+    fi
+    
+    echo ""
+    echo "Can you take even 30 seconds for quiet meditation?"
+    echo "(Press Enter when you're ready to continue)"
+    read -p ""
+    meditation_time="Brief meditation"
+else
+    # Tier 2 & 3
+    echo "Let's go through your prayers:"
+    echo ""
+    echo "Third Step Prayer - turning our will over:"
+    echo "'God, I offer myself to Thee...'"
+    echo "Have you said this? (y/n)"
+    read -p "> " third_step
+    
+    echo ""
+    echo "Serenity Prayer - for daily challenges:"
+    echo "Have you said this? (y/n)"
+    read -p "> " serenity
+    
+    echo ""
+    if [[ "$tier_choice" == "2" ]]; then
+        echo "Let's take 5-10 minutes for meditation."
+    else
+        echo "Let's take 10+ minutes for meditation."
+    fi
+    echo "Press Enter when you're ready to continue..."
+    read -p ""
+    
+    echo ""
+    echo "What guidance or insights came during meditation?"
+    read -p "> " meditation_insight
+    meditation_time="Full meditation completed"
+fi
+echo ""
+
+# Step 5: Daily Commitments
+echo "💪 DAILY COMMITMENTS"
+echo "==================="
+echo "Let's make your recovery commitments specific and achievable."
+echo ""
+echo "What's ONE specific recovery action you commit to today?"
+echo "(Examples: call sponsor, read pages 86-88, help another alcoholic)"
+read -p "> " main_commitment
+echo ""
+
+echo "Creating a failsafe plan..."
+echo "Complete this: 'If I struggle today, I will...'"
+read -p "> " failsafe_plan
+echo ""
+
+if [[ "$tier_choice" != "1" ]]; then
+    echo "Which character defect will you work on today?"
+    read -p "> " character_defect
+    echo ""
+    
+    echo "Any service commitment for today?"
+    read -p "> " service_commitment
+    echo ""
+fi
+
+# Step 6: Meeting Plan
+echo "🏛️ MEETING PLAN"
+echo "==============="
+echo "Do you have a meeting planned for today? (y/n)"
+read -p "> " meeting_planned
+
+if [[ "$meeting_planned" == "y" || "$meeting_planned" == "Y" ]]; then
+    echo "What time and which meeting?"
+    read -p "> " meeting_details
+    echo "Excellent! Stay committed to attending."
+else
+    echo "Consider finding a meeting today at aa.org or your local directory."
+fi
+echo ""
+
+# Step 7: Current Step Work
+echo "📖 STEP WORK"
+echo "============"
+echo "Which step are you currently working?"
+read -p "Step: " current_step
+if [[ "$tier_choice" != "1" ]]; then
+    echo "What's your specific focus with this step today?"
+    read -p "> " step_focus
+fi
+echo ""
+
+# Save to log
+log_dir="/home/lucas/projects/my-addiction/logs"
+mkdir -p "$log_dir"
+log_date=$(date +%Y-%m-%d)
+log_file="$log_dir/morning-routine-$log_date.txt"
+
+{
+    echo "AA MORNING ROUTINE - $today_date at $current_time"
+    echo "================================================"
+    echo "Location: $location"
+    echo "Routine Tier: $tier_choice"
+    echo ""
+    echo "GRATITUDE:"
+    echo "- Most grateful for: $main_gratitude"
+    echo "- Yesterday's gratitudes:"
+    echo -e "$gratitude_list"
+    echo "- Recovery gratitude: $recovery_gratitude"
+    echo ""
+    echo "CHECK-IN:"
+    echo "- Feeling: $feeling"
+    echo ""
+    echo "SPIRITUAL PRACTICE:"
+    echo "- Reading insight: $reading_insight"
+    echo "- Application: $reading_application"
+    echo "- Prayer/Meditation: $meditation_time"
+    if [[ -n "$meditation_insight" ]]; then
+        echo "- Meditation insight: $meditation_insight"
+    fi
+    echo ""
+    echo "COMMITMENTS:"
+    echo "- Main commitment: $main_commitment"
+    echo "- Failsafe plan: $failsafe_plan"
+    if [[ -n "$character_defect" ]]; then
+        echo "- Character defect focus: $character_defect"
+    fi
+    if [[ -n "$service_commitment" ]]; then
+        echo "- Service: $service_commitment"
+    fi
+    echo ""
+    echo "STEP WORK:"
+    echo "- Current step: $current_step"
+    if [[ -n "$step_focus" ]]; then
+        echo "- Today's focus: $step_focus"
+    fi
+    echo ""
+    echo "MEETING:"
+    if [[ "$meeting_planned" == "y" || "$meeting_planned" == "Y" ]]; then
+        echo "- Meeting planned: $meeting_details"
+    else
+        echo "- No meeting planned yet"
+    fi
+    echo ""
+    echo "Routine completed at: $(date +%H:%M)"
+} > "$log_file"
+
+# Completion message
+echo "✅ ROUTINE COMPLETE!"
+echo "==================="
+echo ""
+echo "Congratulations! You've completed your Tier $tier_choice morning routine."
+echo ""
+echo "Today's commitments:"
+echo "✓ $main_commitment"
+if [[ "$meeting_planned" == "y" || "$meeting_planned" == "Y" ]]; then
+    echo "✓ Meeting: $meeting_details"
+fi
+echo "✓ Failsafe: $failsafe_plan"
+echo ""
+echo "Your routine has been saved to: $log_file"
+echo ""
+echo "Remember: One day at a time. You've started this day with intention."
+echo "That's what matters. Keep coming back! 🌟"
+echo ""
