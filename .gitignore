@@ -1,0 +1,15 @@
+node_modules
+
+# Credentials and sensitive files
+credentials/
+client_secret*.json
+*.keys.json
+.gmail-mcp/
+
+# OAuth tokens
+token.json
+*-token.json
+
+# Environment files
+.env
+.env.local

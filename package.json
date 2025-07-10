@@ -1,0 +1,33 @@
+{
+  "name": "my-addiction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasnoah/claudeisgod.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lucasnoah/claudeisgod/issues"
+  },
+  "homepage": "https://github.com/lucasnoah/claudeisgod#readme",
+  "dependencies": {
+    "@cocal/google-calendar-mcp": "^1.4.8",
+    "@gongrzhe/server-gmail-autoauth-mcp": "^1.1.10",
+    "@notionhq/notion-mcp-server": "^1.8.1",
+    "dotenv": "^17.2.0",
+    "gmail-mcp-server": "^1.0.24"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
